@@ -1,0 +1,29 @@
+services:
+  server:
+    build:
+      context: .
+      args:
+        - HF_TOKEN=$HF_TOKEN
+        - MODEL=facebook/opt-125m
+    container_name: llms-server
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - capabilities: [gpu]
+              count: all
+              driver: nvidia
+    environment:
+      TENSOR_PARALLEL_SIZE: "1"
+    image: ivangabriele/llm:facebook__opt-125m
+    ipc: host
+    logging:
+      driver: json-file
+      options:
+        max-file: "1"
+        max-size: "10m"
+    ports:
+      - 8000:8000
+    shm_size: 1024M
+    ulimits:
+      stack: 67108864
