@@ -43,6 +43,7 @@ ENV TENSOR_PARALLEL_SIZE=1
 WORKDIR /workspace
 
 RUN pip install \
+  fastchat \
   fschat \
   huggingface_hub \
   xformers \
