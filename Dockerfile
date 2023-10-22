@@ -43,8 +43,7 @@ ENV TENSOR_PARALLEL_SIZE=1
 WORKDIR /workspace
 
 RUN pip install \
-  fastchat \
-  fschat \
+  fschat[model_worker,webui] \
   huggingface_hub \
   xformers \
   vllm
