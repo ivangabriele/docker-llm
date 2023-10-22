@@ -45,7 +45,7 @@ RUN pip install \
   xformers \
   vllm
 
-RUN mkdir ./models
+RUN mkdir -p ./models
 
 COPY ./entrypoint.sh /workspace/entrypoint.sh
 
