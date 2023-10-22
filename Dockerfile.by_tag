@@ -47,6 +47,8 @@ RUN pip install \
   xformers \
   vllm
 
+RUN mkdir -p ./models
+
 RUN python -c "import huggingface_hub; huggingface_hub.login(token='${HF_TOKEN}', add_to_git_credential=False)"
 RUN python -c "import huggingface_hub; huggingface_hub.hf_hub_download(repo_id='${MODEL}', filename='config.json', cache_dir='./models')"
 
