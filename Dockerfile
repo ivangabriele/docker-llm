@@ -12,7 +12,11 @@ RUN apt-get update
 
 # CUDA v11
 # Because of https://github.com/vllm-project/vllm/issues/1369
-RUN apt-get install -y cuda-toolkit-11.7
+RUN wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/x86_64/cuda-keyring_1.1-1_all.deb && \
+  dpkg -i cuda-keyring_1.1-1_all.deb && \
+  rm -f cuda-keyring_1.1-1_all.deb && \
+  apt-get update && \
+  apt-get install -y cuda-toolkit-11.7
 
 # Pip
 RUN curl -s https://bootstrap.pypa.io/get-pip.py -o get-pip.py && \
