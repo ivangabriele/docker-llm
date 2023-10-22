@@ -1,10 +1,9 @@
 DOCKER_HUB_REPOSITORY="ivangabriele/llm"
-FROM_TAG="23.09-py3"
 
-.PHONY: build clean push run
+.PHONY: build clean push run test
 
 build:
-	FROM_TAG="$(FROM_TAG)" ./build.sh
+	./build.sh
 
 clean:
 	find ./models -maxdepth 1 -mindepth 1 ! -name '.gitkeep' -exec rm -r {} +
@@ -15,9 +14,11 @@ push:
 run:
 	./entrypoint.sh
 
+test:
+	./test.sh
+
 # ----------------------------------------------------------
 # By Tag
 
-
 build:
-	FROM_TAG="$(FROM_TAG)" ./build.sh
+	./build.by_tag.sh
