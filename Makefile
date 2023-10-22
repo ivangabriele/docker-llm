@@ -20,5 +20,5 @@ test:
 # ----------------------------------------------------------
 # By Tag
 
-build:
-	./build.by_tag.sh
+# build:
+# 	./build.by_tag.sh
