@@ -10,7 +10,7 @@ and ~~pre-loaded~~ LLMs are served via [vLLM](https://github.com/vllm-project/vl
 
 > [!WARNING]  
 > Pre-loaded LLM tags are still a work in progress.
-> This is why you must provide your `HF_TOKEN` and `MODEL` env to make it work.
+> This is why – for now – you must provide your `HF_TOKEN` and `MODEL` env to make it work.
 
 ## Tags
 
@@ -28,7 +28,7 @@ and ~~pre-loaded~~ LLMs are served via [vLLM](https://github.com/vllm-project/vl
 ### For pre-loaded LLM tags
 
 > [!WARNING]  
-> This is still a work in progress.
+> Don't use that. This is still a work in progress.
 
 - `TENSOR_PARALLEL_SIZE`: Number of GPUs to use. Default: `1`.
 

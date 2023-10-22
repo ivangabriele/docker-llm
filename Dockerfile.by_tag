@@ -33,7 +33,9 @@ ARG HF_TOKEN
 ARG MODEL
 
 ENV HF_TOKEN=$HF_TOKEN
+ENV HOST=0.0.0.0
 ENV MODEL=$MODEL
+ENV PORT=8000
 # https://huggingface.co/docs/transformers/installation
 ENV TENSOR_PARALLEL_SIZE=1
 
@@ -43,8 +45,6 @@ RUN pip install \
   huggingface_hub \
   xformers \
   vllm
-
-RUN mkdir ./models
 
 RUN python -c "import huggingface_hub; huggingface_hub.login(token='${HF_TOKEN}', add_to_git_credential=False)"
 RUN python -c "import huggingface_hub; huggingface_hub.hf_hub_download(repo_id='${MODEL}', filename='config.json', cache_dir='./models')"

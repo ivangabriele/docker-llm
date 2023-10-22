@@ -34,7 +34,9 @@ FROM base as server
 EXPOSE 8000
 
 ENV HF_TOKEN=
+ENV HOST=0.0.0.0
 ENV MODEL=
+ENV PORT=8000
 # https://huggingface.co/docs/transformers/installation
 ENV TENSOR_PARALLEL_SIZE=1
 
@@ -44,8 +46,6 @@ RUN pip install \
   huggingface_hub \
   xformers \
   vllm
-
-RUN mkdir -p ./models
 
 COPY ./entrypoint.sh /workspace/entrypoint.sh
 
