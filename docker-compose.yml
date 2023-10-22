@@ -2,9 +2,6 @@ services:
   server:
     build:
       context: .
-      args:
-        - HF_TOKEN=$HF_TOKEN
-        - MODEL=facebook/opt-125m
     container_name: llm-server
     deploy:
       resources:
@@ -14,8 +11,10 @@ services:
               count: all
               driver: nvidia
     environment:
+      HF_TOKEN: $HF_TOKEN
+      MODEL: "mistralai/Mistral-7B-v0.1"
       TENSOR_PARALLEL_SIZE: "1"
-    image: ivangabriele/llm:facebook__opt-125m
+    image: ivangabriele/llm:base
     ipc: host
     logging:
       driver: json-file

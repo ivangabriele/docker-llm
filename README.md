@@ -5,21 +5,24 @@
 [![img-runpod]][link-runpod]
 
 Images are based on [PyTorch](https://catalog.ngc.nvidia.com/orgs/nvidia/containers/pytorch)
-which includes Ubuntu with Nvidia CUDA, and included LLMs are served via [vLLM](https://github.com/vllm-project/vllm).
+which includes Ubuntu with Nvidia CUDA,
+and ~~pre-loaded~~ LLMs are served via [vLLM](https://github.com/vllm-project/vllm).
+
+> [!WARNING]  
+> Pre-loaded LLM tags are still a work in progress.
+> This is why you must provide your `HF_TOKEN` and `MODEL` env to make it work.
 
 ## Tags
 
 - `base`: The base image loading any provided LLM and exposing it as an OpenAI API-Compatible server.
 
-> [!WARNING]  
-> Pre-loaded LLM tags are still a work in progress.
 
 ## Environment Variables
 
 ### For `base` tag
 
-- `HF_TOKEN`: Your Hugging Face [Access Token](https://huggingface.co/settings/tokens) (`read`). Mandatory.
-- `MODEL`: Hugging Face Model ID. Default: `Open-Orca/Mistral-7B-OpenOrca`.
+- `HF_TOKEN`: Your Hugging Face [Access Token](https://huggingface.co/settings/tokens) (`read`). **Mandatory**.
+- `MODEL`: Hugging Face Model ID (i.e.: `mistralai/Mistral-7B-v0.1`). **Mandatory**.
 - `TENSOR_PARALLEL_SIZE`: Number of GPUs to use. Default: `1`.
 
 ### For pre-loaded LLM tags
@@ -49,4 +52,4 @@ The API is exposed on port `8000`.
 [link-docker]: https://hub.docker.com/r/ivangabriele/llm
 [link-github]: https://github.com/ivangabriele/docker-llm
 [link-github-actions]: https://github.com/ivangabriele/docker-llm/actions/workflows/main.yml
-[link-runpod]: https://runpod.io/gsc?template=fc1g5zbii8&ref=s0k66ov1
+[link-runpod]: https://runpod.io/gsc?template=b4fx781ink&ref=s0k66ov1
