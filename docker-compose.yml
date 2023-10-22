@@ -5,7 +5,7 @@ services:
       args:
         - HF_TOKEN=$HF_TOKEN
         - MODEL=facebook/opt-125m
-    container_name: llms-server
+    container_name: llm-server
     deploy:
       resources:
         reservations:

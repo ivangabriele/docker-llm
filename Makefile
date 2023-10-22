@@ -1,4 +1,4 @@
-DOCKER_HUB_REPOSITORY="ivangabriele/llms"
+DOCKER_HUB_REPOSITORY="ivangabriele/llm"
 FROM_TAG="23.09-py3"
 
 .PHONY: build run

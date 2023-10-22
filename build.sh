@@ -5,7 +5,7 @@ if [ -f ".env" ]; then
   source .env
 fi
 
-DOCKER_HUB_REPOSITORY="ivangabriele/llms"
+DOCKER_HUB_REPOSITORY="ivangabriele/llm"
 FROM_TAG="23.09-py3"
 
 docker build \
