@@ -12,10 +12,13 @@ OpenAI API-Compatible ready-to-deploy LLM Server.
     "model": "./model", // because this is where this model is pre-loaded
     "api_key": "None",
     "api_base": "https://[YOUR_POD_ID]-8000.proxy.runpod.net/v1", # RunPod.io
-    "api_base": "https://[YOUR_INSTANCE_IP]:8000/v1", # Vast.ai
+    "api_base": "http://[YOUR_INSTANCE_IP]:[YOUR_PUBLIC_8000_BINDING_PORT]/v1", # Vast.ai
     "api_type": "open_ai"
   }
   ```
+
+Vast.ai will automatically bind you port `8000` to a random public port. You can find it in your instance details.
+You must replace `[YOUR_PUBLIC_8000_BINDING_PORT]` with this randome public port.
 
 ---
 
