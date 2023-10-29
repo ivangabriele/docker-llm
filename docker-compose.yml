@@ -1,6 +1,10 @@
 services:
   server:
     build:
+      args:
+        HF_TOKEN: $HF_TOKEN
+        MAX_MODEL_LENGTH: "16314"
+        MODEL: "Open-Orca/LlongOrca-13B-16k"
       context: .
     container_name: llm-server
     deploy:
@@ -11,10 +15,8 @@ services:
               count: all
               driver: nvidia
     environment:
-      HF_TOKEN: $HF_TOKEN
-      MODEL: "mistralai/Mistral-7B-v0.1"
       TENSOR_PARALLEL_SIZE: "1"
-    image: ivangabriele/llm:base
+    image: ivangabriele/llm:open-orca__llongorca-13b-16k
     ipc: host
     logging:
       driver: json-file
@@ -22,7 +24,8 @@ services:
         max-file: "1"
         max-size: "10m"
     ports:
-      - 8000:8000
+      - "22:22"
+      - "8000:8000"
     shm_size: 1024M
     ulimits:
       stack: 67108864
