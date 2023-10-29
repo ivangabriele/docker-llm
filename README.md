@@ -4,18 +4,14 @@
 [![img-docker]][link-docker]
 [![img-runpod]][link-runpod]
 
-Images are based on [PyTorch](https://catalog.ngc.nvidia.com/orgs/nvidia/containers/pytorch)
-which includes Ubuntu with Nvidia CUDA,
-and ~~pre-loaded~~ LLMs are served via [vLLM](https://github.com/vllm-project/vllm).
-
-> [!WARNING]  
-> Pre-loaded LLM tags are still a work in progress.
-> This is why – for now – you must provide your `HF_TOKEN` and `MODEL` env to make it work.
+Images are based on [Nvidia CUDA images](https://hub.docker.com/r/nvidia/cuda).
+LLMs are pre-loaded and served via [vLLM](https://github.com/vllm-project/vllm).
 
 ## Tags
 
-- `base`: The base image loading any provided LLM and exposing it as an OpenAI API-Compatible server.
-
+| Tag                            | Model                                                                             | RunPod.io                                                               | Vast.ai                                                                                                                          |
+| ------------------------------ | --------------------------------------------------------------------------------- | ----------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| `open-orca__llongorca-13b-16k` | [Open-Orca/LlongOrca-13B-16k](https://huggingface.co/Open-Orca/LlongOrca-13B-16k) | [![img-runpod]](https://runpod.io/gsc?template=b4fx781ink&ref=s0k66ov1) | [![img-vastai]](https://cloud.vast.ai/?ref_id=46067&creator_id=46067&name=%5BIvan%20Gabriele%5D%20Open-Orca%2FLlongOrca-13B-16k) |
 
 ## Environment Variables
 
@@ -52,4 +48,5 @@ The API is exposed on port `8000`.
 [link-docker]: https://hub.docker.com/r/ivangabriele/llm
 [link-github]: https://github.com/ivangabriele/docker-llm
 [link-github-actions]: https://github.com/ivangabriele/docker-llm/actions/workflows/main.yml
+
 [link-runpod]: https://runpod.io/gsc?template=b4fx781ink&ref=s0k66ov1

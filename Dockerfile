@@ -1,65 +1,93 @@
+ARG CUDA_VERSION="11.8.0"
+ARG CUDNN_VERSION="8"
+ARG UBUNTU_VERSION="22.04"
+
 # ==============================================================================
 # BASE
 
-FROM ubuntu:22.04 as base
+FROM nvidia/cuda:${CUDA_VERSION}-cudnn${CUDNN_VERSION}-devel-ubuntu${UBUNTU_VERSION} as base
+
+ARG PYTORCH_VERSION="2.0.1"
+ARG PYTORCH_CUDA_VERSION="118"
 
 ENV DEBIAN_FRONTEND=noninteractive
 
 # Base Packages
-RUN apt-get update
+RUN apt-get update && \
+  apt-get upgrade -y
 RUN apt-get install -y \
+  curl \
   git \
-  python3 \
+  git-lfs \
+  openssh-server \
+  openssh-client \
+  python3.11-full \
+  python3.11-venv \
   python3-pip \
+  vim \
   wget
-
-# CUDA v11
-# Because of https://github.com/vllm-project/vllm/issues/1369
-RUN wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/x86_64/cuda-keyring_1.1-1_all.deb && \
-  dpkg -i cuda-keyring_1.1-1_all.deb && \
-  rm -f cuda-keyring_1.1-1_all.deb && \
-  apt-get update && \
-  apt-get install cuda-11-8
+RUN apt-get clean && \
+  rm -rf /var/lib/apt/lists/*
 
 # Pip
 RUN curl -s https://bootstrap.pypa.io/get-pip.py -o get-pip.py && \
-  python get-pip.py --force-reinstall && \
+  python3 get-pip.py --force-reinstall && \
   rm get-pip.py
 
-# ==============================================================================
-# SERVER
+# Pytorch
+RUN pip install \
+  --no-cache-dir \
+  -U \
+  torch==${PYTORCH_VERSION} torchvision torchaudio \
+  --extra-index-url https://download.pytorch.org/whl/cu${PYTORCH_CUDA_VERSION}
 
-FROM base as server
+# Poetry
+RUN pip install poetry
 
-EXPOSE 8000
-
-ENV HF_TOKEN=
-ENV HOST=0.0.0.0
-ENV MODEL=
-ENV PORT=8000
-# https://huggingface.co/docs/transformers/installation
-ENV TENSOR_PARALLEL_SIZE=1
+# ----------------------------------------------------------
+# Server Setup
 
 WORKDIR /workspace
 
-# https://github.com/vllm-project/vllm/issues/855
-RUN pip3 install \
-  vllm
-RUN pip3 uninstall -y \
-  torch
-RUN pip3 install \
-  pandas \
-  ray \
-  fschat
-RUN pip3 install \
-  fschat==0.2.23
-RUN pip3 install \
-  torch \
-  torchaudio \
-  torchvision \
-  --index-url https://download.pytorch.org/whl/cu118
+COPY ./load.py /workspace
+COPY ./poetry.lock /workspace
+COPY ./pyproject.toml /workspace
 
-RUN mkdir -p ./models
+RUN poetry install --no-dev
+
+# ==============================================================================
+# DATA
+
+FROM base as data
+
+ARG HF_TOKEN
+ARG MODEL
+
+ENV DEBIAN_FRONTEND=noninteractive
+ENV HF_TOKEN=${HF_TOKEN}
+ENV MODEL=${MODEL}
+
+# ----------------------------------------------------------
+# Model
+
+RUN poetry run python3 ./load.py
+
+# ==============================================================================
+# BOOT
+
+FROM data as boot
+
+EXPOSE 22
+EXPOSE 8000
+
+ARG MAX_MODEL_LENGTH
+
+ENV HOST=0.0.0.0
+ENV MAX_MODEL_LENGTH=${MAX_MODEL_LENGTH}
+ENV MODEL="./model"
+ENV PORT=8000
+# https://huggingface.co/docs/transformers/installation
+ENV TENSOR_PARALLEL_SIZE=1
 
 COPY ./entrypoint.sh /workspace/entrypoint.sh
 
