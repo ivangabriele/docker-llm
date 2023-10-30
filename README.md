@@ -1,9 +1,9 @@
-# Docker Image :: OpenAI API-Compatible Pre-loaded LLM Server
+# Docker Image ―<br />OpenAI API-Compatible Pre-loaded LLM Server
 
 [![img-github]][link-github]
 [![img-docker]][link-docker]
 
-Images are based on [Nvidia CUDA images](https://hub.docker.com/r/nvidia/cuda).
+Docker images are based on [Nvidia CUDA images](https://hub.docker.com/r/nvidia/cuda).
 LLMs are pre-loaded and served via [vLLM](https://github.com/vllm-project/vllm).
 
 ## Environment Variables
@@ -16,9 +16,10 @@ The OpenAI API is exposed on port `8000`.
 
 ## Tags & Deployment Links
 
-| Tag                            | Model                                                                    | RunPod                                                                  | Vast.ai                                                                                                                       |
-| ------------------------------ | ------------------------------------------------------------------------ | ----------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
-| `open-orca__llongorca-13b-16k` | [![img-huggingface]](https://huggingface.co/Open-Orca/LlongOrca-13B-16k) | [![img-runpod]](https://runpod.io/gsc?template=b4fx781ink&ref=s0k66ov1) | [![img-vastai]](https://cloud.vast.ai/?ref_id=46067&creator_id=46067&name=Ivan%20Gabriele%3A%20Open-Orca%2FLlongOrca-13B-16k) |
+| Tag                            | Model                                                                    | RunPod                                                                  | Vast.ai                                                                                           |
+| ------------------------------ | ------------------------------------------------------------------------ | ----------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| `lmsys__vicuna-13b-v1.5-16k`   | [![img-huggingface]](https://huggingface.co/lmsys/vicuna-13b-v1.5-16k)   | [![img-runpod]](https://runpod.io/gsc?template=7qj5x0er29&ref=s0k66ov1) | [![img-vastai]](https://cloud.vast.ai/?ref_id=46067&template_id=2e645ca0121df6858ca25e73938d118e) |
+| `open-orca__llongorca-13b-16k` | [![img-huggingface]](https://huggingface.co/Open-Orca/LlongOrca-13B-16k) | [![img-runpod]](https://runpod.io/gsc?template=b4fx781ink&ref=s0k66ov1) | [![img-vastai]](https://cloud.vast.ai/?ref_id=46067&template_id=6ab428f190858336446c2ee38ceb2cc6) |
 
 ---
 

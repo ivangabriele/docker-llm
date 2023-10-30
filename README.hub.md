@@ -1,9 +1,9 @@
-OpenAI API-Compatible ready-to-deploy LLM Server.
+# OpenAI API-Compatible Pre-loaded LLM Server
 
 [![img-github]][link-github]
 [![img-docker]][link-docker]
 
-- Model: [Open-Orca/LlongOrca-13B-16k](https://huggingface.co/Open-Orca/LlongOrca-13B-16k).
+- Model: [lmsys/vicuna-13b-v1.5-16k](https://huggingface.co/lmsys/vicuna-13b-v1.5-16k).
 - OpenAI API-Compatible port: `8000`.
 - Update `TENSOR_PARALLEL_SIZE` env to match your GPU count if your server has more than 1 GPU. Default: `1`.
 - Configuration:
@@ -18,7 +18,7 @@ OpenAI API-Compatible ready-to-deploy LLM Server.
   ```
 
 Vast.ai will automatically bind you port `8000` to a random public port. You can find it in your instance details.
-You must replace `[YOUR_PUBLIC_8000_BINDING_PORT]` with this randome public port.
+You must replace `[YOUR_PUBLIC_8000_BINDING_PORT]` with this random public port.
 
 ---
 

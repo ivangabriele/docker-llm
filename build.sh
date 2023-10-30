@@ -20,4 +20,5 @@ docker build \
   --build-arg HF_TOKEN="${HF_TOKEN}" \
   --build-arg MAX_MODEL_LENGTH="${MAX_MODEL_LENGTH}" \
   --build-arg MODEL="${MODEL}" \
+  --no-cache \
   -t "ivangabriele/llm:${TAG}" .

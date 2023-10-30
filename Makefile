@@ -6,7 +6,8 @@ build: down
 		grep 'ivangabriele/llm' | \
 		xargs -I {} docker rmi {}
 	docker image prune -f
-	MAX_MODEL_LENGTH=16384 MODEL=Open-Orca/LlongOrca-13B-16k ./build.sh
+	# MAX_MODEL_LENGTH=16384 MODEL=Open-Orca/LlongOrca-13B-16k ./build.sh
+	MAX_MODEL_LENGTH=16384 MODEL=lmsys/vicuna-13b-v1.5-16k ./build.sh
 
 clean:
 	find ./model -maxdepth 1 -mindepth 1 ! -name '.gitkeep' -exec rm -r {} +
